@@ -23,7 +23,7 @@ class NWinnerSpider(scrapy.Spider):
             .extract()
             if country:
                 winners = h3.xpath('following-sibling::ol[1]')
-                for w in winners.xpath('li'):
+                for w in winners.xpath('li[not(self::*[@class="mw-empty-elt"])]'):
                     text = w.xpath('descendant-or-self::text()')\
                     .extract()
                     yield NWinnerItem(
